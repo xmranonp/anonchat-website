@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How AnonChat works · Circuits and security</title><meta name="description" content="How AnonChat delivers messages over the Anyone network without a server, how circuits work, and the security features that protect you.">
+<meta property="og:title" content="How AnonChat works · Circuits and security"><meta property="og:description" content="How AnonChat delivers messages over the Anyone network without a server, how circuits work, and the security features that protect you."><meta property="og:image" content="assets/img/chat.webp">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="assets/img/favicon.png"><link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="nav"><div class="wrap">
+<a class="brand" href="index.html"><img src="assets/img/app-icon.png" alt="">AnonChat</a>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<nav id="menu"><a href="index.html">Home</a><a href="how-it-works.html" aria-current="page">How it works</a><a href="download.html">Download</a><a href="assets/AnonChat-Official-Guide.pdf">Guide (PDF)</a><a href="https://github.com/xmranonp/AnonChat">GitHub</a><a class="btn btn-primary" href="download.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</a></nav>
+</div></header>
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="kicker">How it works</div>
+  <h1>Every AnonChat is a small server of its own.</h1>
+  <p class="lead">Your app is a hidden service on the Anyone network, reachable at your <code>.anyone</code> address and nowhere else. Messages go from your computer to your contact's, encrypted the whole way, without passing through any company.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><div class="kicker">The path of a message</div><h2>Five relays and a meeting point. Neither side learns where the other is.</h2><p class="lead">Your app builds a path of relays to a meeting point; your contact's app builds its own, one relay longer because theirs is the address being reached. The message crosses both, so your contact never sees your IP address and you never see theirs.</p></div>
+  <div class="diagram">
+  <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,system-ui,sans-serif" font-size="13" role="img" aria-label="A message crosses five relays and a meeting point between two AnonChat apps">
+    <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8A94A0"/></marker></defs>
+    <g fill="none" stroke="#8A94A0" stroke-width="1.3">
+      <path d="M164 70H226" marker-end="url(#a)"/><path d="M272 70H384" marker-end="url(#a)"/><path d="M430 70H562" marker-end="url(#a)"/>
+      <path d="M564 206H494" marker-end="url(#a)"/><path d="M448 206H384" marker-end="url(#a)"/><path d="M338 206H274" marker-end="url(#a)"/><path d="M228 206H166" marker-end="url(#a)"/>
+    </g>
+    <rect x="1" y="40" width="163" height="60" rx="8" fill="#fff" stroke="#121820" stroke-width="1.3"/>
+    <text x="13" y="64" font-weight="600" fill="#121820">Your AnonChat</text><text x="13" y="84" font-size="11.5" fill="#6B7480">encrypts for Mario only</text>
+    <rect x="1" y="176" width="163" height="60" rx="8" fill="#fff" stroke="#121820" stroke-width="1.3"/>
+    <text x="13" y="200" font-weight="600" fill="#121820">Mario's AnonChat</text><text x="13" y="220" font-size="11.5" fill="#6B7480">the only place it is read</text>
+    <g stroke-width="1.5">
+      <circle cx="250" cy="70" r="22" fill="#E3F6FC" stroke="#0E9BC9"/><circle cx="408" cy="70" r="22" fill="#fff" stroke="#8A94A0"/>
+      <circle cx="250" cy="206" r="22" fill="#E3F6FC" stroke="#0E9BC9"/><circle cx="360" cy="206" r="22" fill="#fff" stroke="#8A94A0"/><circle cx="470" cy="206" r="22" fill="#fff" stroke="#8A94A0"/>
+    </g>
+    <g font-size="11.5" text-anchor="middle">
+      <text x="250" y="112" font-weight="600" fill="#121820">Entry guard</text><text x="250" y="128" fill="#6B7480">sees your IP,</text><text x="250" y="142" fill="#6B7480">not the message</text>
+      <text x="408" y="112" fill="#121820">Relay</text>
+      <text x="250" y="248" font-weight="600" fill="#121820">Entry guard</text><text x="250" y="264" fill="#6B7480">sees Mario's IP,</text><text x="250" y="278" fill="#6B7480">not the message</text>
+      <text x="360" y="248" fill="#121820">Relay</text><text x="470" y="248" fill="#121820">Relay</text>
+    </g>
+    <rect x="566" y="34" width="192" height="208" rx="8" fill="#0B121A"/>
+    <text x="662" y="124" text-anchor="middle" font-weight="600" fill="#fff">Meeting point</text>
+    <text x="662" y="146" text-anchor="middle" font-size="11.5" fill="#9FD9EC">a relay both sides reach</text>
+    <text x="662" y="162" text-anchor="middle" font-size="11.5" fill="#9FD9EC">knows neither IP address</text>
+  </svg>
+  </div>
+  <div class="roles">
+    <div class="g"><h3>1 · Encrypted on your computer</h3><p>Your app encrypts the message for your contact alone, with a key used for that message only.</p></div>
+    <div><h3>2 · Carried by the network</h3><p>Relays pass it along in layers of encryption. Each knows only its two neighbours.</p></div>
+    <div><h3>3 · Delivered, then confirmed</h3><p>Your contact's app stores it encrypted and confirms delivery: ✓, and ✓✓ once read if they share read receipts.</p></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap split">
+  <div class="txt"><div class="kicker">When someone is offline</div><h2 style="margin:10px 0 16px">No server holds your messages. Your app does.</h2>
+    <p>If your contact's app isn't running, your message waits on your computer with a ⏳ and is retried every 15 seconds, for 1, 12 or 24 hours as you choose per chat. When your contact comes back online, their app tells yours and everything waiting goes out at once; the same happens when they write to you. If messages to one contact still wait while they can write to you, <b>Rebuild network path</b> in that chat's ⋮ menu sends them right away.</p>
+    <p>A green or red dot on each contact shows whether they can be reached right now.</p></div>
+  <div class="frame"><img src="assets/img/media.webp" alt="A chat with a video and a photo" loading="lazy" width="1182" height="790"><div class="caption">Photos, videos, voice messages and files up to 5 MB travel the same way, encrypted end to end.</div></div>
+</div></section>
+
+<section id="circuits"><div class="wrap">
+  <div class="head"><div class="kicker">Circuits</div><h2>See every relay your traffic crosses.</h2><p class="lead">A circuit is the chain of relays your traffic passes through, normally three. The network panel shows each one live: nickname, country, bandwidth and role.</p></div>
+  <div class="roles" style="margin:0 0 56px">
+    <div class="g"><h3>Entry guard</h3><p>The first relay, and the only one that sees your IP address. It never sees what you send or to whom.</p></div>
+    <div><h3>Relay</h3><p>A middle relay. It sees only the relays on either side of it.</p></div>
+    <div><h3>Exit</h3><p>Used only for traffic leaving the network, such as a website opened through the SOCKS5 proxy. Messages to contacts never use an exit.</p></div>
+  </div>
+  <div class="split rev">
+    <div class="txt"><h3 style="font-size:24px;margin-bottom:12px">Circuits, map and your own proxy</h3>
+      <ul class="checks">
+        <li><b>Circuits tab:</b> every circuit in use, with each relay's flags. Close one, or build a new one. During a call you make, the circuit carrying it is marked.</li>
+        <li><b>Map tab:</b> a 3D globe showing the circuit to a contact, or the one used by your proxy.</li>
+        <li><b>SOCKS5 proxy:</b> point a browser at <code>127.0.0.1:9050</code> and its traffic goes through the Anyone network too.</li>
+        <li><b>Exit country:</b> choose where proxy traffic leaves the network, or let it pick.</li>
+      </ul></div>
+    <div class="frame"><img src="assets/img/circuit-check.webp" alt="Circuits tab with a live circuit and a browser using the proxy" loading="lazy" width="1182" height="886"><div class="caption">A live circuit, and a browser using AnonChat's proxy: the website sees the exit relay's address, never the user's.</div></div>
+  </div>
+</div></section>
+
+<section id="security" class="alt"><div class="wrap">
+  <div class="head"><div class="kicker">Security</div><h2>Three layers of protection.</h2><p class="lead">The network hides where you are, encryption hides what you say, and your computer keeps everything locked.</p></div>
+  <div class="table-wrap"><table class="table">
+    <tr><th>Protection</th><th>What it does for you</th></tr>
+    <tr><td>End-to-end encryption</td><td>Double Ratchet with an X3DH handshake (P-256, AES-256-GCM). Each message has its own key, so a key stolen later can't open earlier messages.</td></tr>
+    <tr><td>Weekly key refresh</td><td>The key a new contact uses to start a chat with you is replaced every week, and old ones are deleted after 60 days. Contacts take the new one only after checking its signature against the identity key they saved, so even a first message stays protected if a key is stolen later.</td></tr>
+    <tr><td>Pinned identity keys</td><td>A contact's key is fetched from their own address and kept, and never replaced silently. A message claiming to be them with another key is refused.</td></tr>
+    <tr><td>Safety numbers</td><td>Compare a short number in person or by phone. If it matches, nobody is in the middle.</td></tr>
+    <tr><td>Message requests and stamps</td><td>Strangers land in Requests, text only until you accept, marked <i>Not verified yet</i> until Accept checks the address. Messages between contacts carry a stamp only the two of you can make, so nobody can pose as a contact.</td></tr>
+    <tr><td>Flood protection</td><td>Small allowances for strangers, and a computing puzzle for non-contacts during a flood.</td></tr>
+    <tr><td>Encrypted on your computer</td><td>Contacts, messages, keys and media are stored encrypted, unlocked with a PIN through your system's vault, or with a passphrase that also protects a stolen disk. The one exception is your address's private key: the Anyone network client reads it from its own file, which only your user account can open.</td></tr>
+    <tr><td>Encrypted backups</td><td>A backup holds your address and keys, sealed with a passphrase of its own (at least 12 characters). AnonChat asks for your PIN or passphrase before making one. Message history and other people's pictures aren't included.</td></tr>
+    <tr><td>Locked to the network</td><td>The app can't connect to anything outside the Anyone network. Names are looked up inside it, and calls use no WebRTC or direct connection.</td></tr>
+    <tr><td>Padding</td><td>Your link to the network always carries dummy traffic, so someone watching your connection can't easily tell when you send or receive.</td></tr>
+    <tr><td>Private by default</td><td>Read receipts off unless you enable them. Notifications show the name only. Updates are checked only when you ask.</td></tr>
+  </table></div>
+  <div class="split" style="margin-top:64px">
+    <div class="frame"><img src="assets/img/settings-security.webp" alt="Settings, Security section" loading="lazy" width="1182" height="790"></div>
+    <div class="txt"><h3 style="font-size:24px;margin-bottom:12px">PIN or passphrase?</h3>
+      <p>With a <b>PIN</b>, your system's vault holds the key and the 6-digit PIN unlocks the app. It protects against someone opening AnonChat on your computer.</p>
+      <p>With a <b>passphrase</b> of at least 12 characters, the key never touches the vault, so a stolen disk or backup stays unreadable too.</p>
+      <p>Neither can be recovered if forgotten: there is no company to reset it.</p></div>
+  </div>
+</div></section>
+
+<section id="limits"><div class="wrap">
+  <div class="head"><div class="kicker">Honest limits</div><h2>What AnonChat can't do.</h2><p class="lead">No tool makes you invisible. Know the limits before you rely on one.</p></div>
+  <ul class="limits">
+    <li><b>No human audit yet.</b> Established cryptography and open code, and independent reviews by an AI model, but no outside firm has formally audited it.</li>
+    <li><b>Only photos, videos and audio are cleaned.</b> AnonChat removes location, camera model and time from them before sending and gives them a neutral name. Files sent as plain files (PDF, documents) go exactly as they are, so clean those first. A file that cannot be cleaned is not sent.</li>
+    <li><b>Your computer is the weak point.</b> Malware, or someone using it unlocked, sees what you see.</li>
+    <li><b>What you send can be kept.</b> A contact can copy or screenshot anything, disappearing messages included.</li>
+    <li><b>Both apps must be running.</b> Messages wait on your computer for up to 24 hours, then are marked undelivered.</li>
+    <li><b>Messages take a few extra hops.</b> Relays add a little latency you rarely notice. The first message after a contact comes back online can take a few seconds, and calls carry a delay of about 2 to 3 seconds.</li>
+    <li><b>One computer at a time.</b> No phone app and no sync. A backup moves your identity to a new computer; without one, losing the computer or the PIN means losing the identity.</li>
+    <li><b>Using the network is visible.</b> Your provider can see you use Anyone, not whom you talk to.</li>
+    <li><b>Links open outside AnonChat.</b> A link in a message opens in your usual browser, after a warning; unless that browser uses the SOCKS5 proxy, the site sees your IP address.</li>
+    <li><b>The proxy isn't a privacy browser.</b> Exits can see unencrypted traffic, and browsers have fingerprints.</li>
+  </ul>
+  <div class="cta" style="margin-top:72px"><div><h2>Read the full guide.</h2><p>Twenty-one pages on how AnonChat works and how to use it, with screenshots.</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-primary" href="assets/AnonChat-Official-Guide.pdf"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>Official guide (PDF)</a><a class="btn btn-ghost" href="download.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</a></div></div>
+</div></section>
+</main>
+<footer><div class="wrap"><div class="cols">
+<div><a class="brand" href="index.html"><img src="assets/img/app-icon.png" alt="">AnonChat</a><p style="margin-top:14px;max-width:340px">Private messaging with no company in the middle, over the Anyone network. Open source under the GNU AGPL-3.0.</p></div>
+<div><h4>Product</h4><ul><li><a href="index.html#features">Features</a></li><li><a href="how-it-works.html">How it works</a></li><li><a href="how-it-works.html#security">Security</a></li><li><a href="download.html">Download</a></li></ul></div>
+<div><h4>Resources</h4><ul><li><a href="assets/AnonChat-Official-Guide.pdf">Official guide (PDF)</a></li><li><a href="download.html#faq">FAQ</a></li><li><a href="how-it-works.html#limits">What it can't do</a></li></ul></div>
+<div><h4>Project</h4><ul><li><a href="https://github.com/xmranonp/AnonChat">Source code</a></li><li><a href="https://github.com/xmranonp/AnonChat/releases/latest">Releases</a></li><li><a href="https://github.com/xmranonp/AnonChat/issues">Report an issue</a></li></ul></div>
+</div><div class="legal"><span>© 2026 AnonChat contributors · AGPL-3.0</span><span>AnonChat uses the Anyone network, which is run by independent relay operators and is not operated by AnonChat. This site uses no cookies, analytics or trackers.</span></div></div></footer>
+<script>(function(){var b=document.querySelector('.menu-toggle'),n=document.getElementById('menu');if(!b)return;b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)})})();</script>
+</body></html>
