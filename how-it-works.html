@@ -91,7 +91,6 @@
     <tr><td>Encrypted on your computer</td><td>Contacts, messages, keys and media are stored encrypted, unlocked with a PIN through your system's vault, or with a passphrase that also protects a stolen disk. The one exception is your address's private key: the Anyone network client reads it from its own file, which only your user account can open.</td></tr>
     <tr><td>Encrypted backups</td><td>A backup holds your address and keys, sealed with a passphrase of its own (at least 12 characters). AnonChat asks for your PIN or passphrase before making one. Message history and other people's pictures aren't included.</td></tr>
     <tr><td>Locked to the network</td><td>The app can't connect to anything outside the Anyone network. Names are looked up inside it, and calls use no WebRTC or direct connection.</td></tr>
-    <tr><td>Padding</td><td>Your link to the network always carries dummy traffic, so someone watching your connection can't easily tell when you send or receive.</td></tr>
     <tr><td>Private by default</td><td>Read receipts off unless you enable them. Notifications show the name only. Updates are checked only when you ask.</td></tr>
   </table></div>
   <div class="split" style="margin-top:64px">
@@ -106,7 +105,7 @@
 <section id="limits"><div class="wrap">
   <div class="head"><div class="kicker">Honest limits</div><h2>What AnonChat can't do.</h2><p class="lead">No tool makes you invisible. Know the limits before you rely on one.</p></div>
   <ul class="limits">
-    <li><b>No human audit yet.</b> Established cryptography and open code, and independent reviews by an AI model, but no outside firm has formally audited it.</li>
+    <li><b>No human audit yet.</b> AnonChat has been audited by an AI model (Claude, by Anthropic), but it has not had a human security review yet. It uses established cryptography and open code.</li>
     <li><b>Only photos, videos and audio are cleaned.</b> AnonChat removes location, camera model and time from them before sending and gives them a neutral name. Files sent as plain files (PDF, documents) go exactly as they are, so clean those first. A file that cannot be cleaned is not sent.</li>
     <li><b>Your computer is the weak point.</b> Malware, or someone using it unlocked, sees what you see.</li>
     <li><b>What you send can be kept.</b> A contact can copy or screenshot anything, disappearing messages included.</li>
