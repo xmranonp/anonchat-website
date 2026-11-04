@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>How AnonChat works · Circuits and security</title><meta name="description" content="How AnonChat delivers messages over the Anyone network without a server, how circuits work, and the security features that protect you.">
-<meta property="og:title" content="How AnonChat works · Circuits and security"><meta property="og:description" content="How AnonChat delivers messages over the Anyone network without a server, how circuits work, and the security features that protect you."><meta property="og:image" content="assets/img/og-chat.png">
+<meta property="og:title" content="How AnonChat works · Circuits and security"><meta property="og:description" content="How AnonChat delivers messages over the Anyone network without a server, how circuits work, and the security features that protect you."><meta property="og:image" content="https://xmranonp.github.io/anonchat-website/assets/img/og-chat.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://xmranonp.github.io/anonchat-website/how-it-works.html"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://xmranonp.github.io/anonchat-website/how-it-works.html">
 <meta name="referrer" content="no-referrer">
 <link rel="icon" href="assets/img/favicon.png"><link rel="stylesheet" href="assets/style.css"></head><body>
 <header class="nav"><div class="wrap">
@@ -91,7 +91,7 @@
     <tr><td>Encrypted on your computer</td><td>Contacts, messages, keys and media are stored encrypted, unlocked with a PIN through your system's vault, or with a passphrase that also protects a stolen disk. The one exception is your address's private key: the Anyone network client reads it from its own file, which only your user account can open.</td></tr>
     <tr><td>Encrypted backups</td><td>A backup holds your address and keys, sealed with a passphrase of its own (at least 12 characters). AnonChat asks for your PIN or passphrase before making one. Message history and other people's pictures aren't included.</td></tr>
     <tr><td>Locked to the network</td><td>The app can't connect to anything outside the Anyone network. Names are looked up inside it, and calls use no WebRTC or direct connection.</td></tr>
-    <tr><td>Private by default</td><td>Read receipts off unless you enable them. Notifications show the name only. Updates are checked only when you ask.</td></tr>
+    <tr><td>Private by default</td><td>Read receipts off unless you enable them. Notifications show the name only. Updates are checked only when you ask, or once at every start if you switch that on (it is off by default).</td></tr>
   </table></div>
   <div class="split" style="margin-top:64px">
     <div class="frame"><img src="assets/img/settings-security.webp" alt="Settings, Security section" loading="lazy" width="1182" height="790"></div>
@@ -99,6 +99,13 @@
       <p>With a <b>PIN</b>, your system's vault holds the key and the 6-digit PIN unlocks the app. It protects against someone opening AnonChat on your computer.</p>
       <p>With a <b>passphrase</b> of at least 12 characters, the key never touches the vault, so a stolen disk or backup stays unreadable too.</p>
       <p>Neither can be recovered if forgotten: there is no company to reset it.</p></div>
+  </div>
+  <div class="split rev" style="margin-top:64px">
+    <div class="frame"><img src="assets/img/settings-updates.webp" alt="Settings, Updates section with the start-up check switched on" loading="lazy" width="1180" height="760"></div>
+    <div class="txt"><h3 style="font-size:24px;margin-bottom:12px">Updates that don't give you away</h3>
+      <p><b>Check for updates</b> asks GitHub whether a newer version exists. With <b>Check for updates when AnonChat starts</b> on (it is off by default), AnonChat asks once at every start, after the network is ready.</p>
+      <p>The request goes through the Anyone network on a route of its own, new at every start. A newer version is shown once, with its download link. AnonChat never downloads or installs anything by itself.</p>
+      <p>Open the link in a SOCKS5 compatible browser set to the Anyone proxy, <code>127.0.0.1:9050</code>: your usual browser would reach GitHub directly and show your IP address. Then check the file against <code>SHA256SUMS.txt</code>.</p></div>
   </div>
 </div></section>
 

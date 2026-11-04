@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xmranonp.github.io/anonchat-website/sitemap.xml
